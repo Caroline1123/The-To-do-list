@@ -1,37 +1,44 @@
 let tasks = [];
+let id = 0;
 const addBtn = document.querySelector("#add_task");
+const ul = document.querySelector("ul");
 
 let addTask = (task) => {
-    if (!task) {
+    let taskText  = task.replace(/\s/g, '');
+    if (!taskText) {
         return false;
     }
     else {
-        let newEntry = {"task": task, "status": "to do"};
+        let newEntry = {"task": task, "id": id+1};
+        id ++;
         tasks.push(newEntry)
         return true;
     }
 }
 
 let displayTasks = () => {
-    const ul = document.querySelector("ul");
-    for (let task of tasks) {
+    ul.innerHTML = "";
+    for (let i = 0; i < tasks.length; i++) {
+        let task = tasks[i];
         let li = document.createElement("li");
-        li.innerText = task.task;
+        li.innerHTML = 
+        `<input type="checkbox" name="task_${i}"/>
+        <label for="task_${id}">${task.task}</label>
+        <image class="close_button" src="assets/images/delete.svg" id="task_${id}" alt="delete task" title="Delete Task"></image>
+        `;
         ul.appendChild(li);
     }
 }
 
-addBtn.addEventListener("click", (event) => {
+addBtn.addEventListener("click", () => {
     const inputField = document.querySelector("#new_task");
     const newTask = inputField.value;
     inputField.value = "";
     let taskAdded = addTask(newTask);
     if (taskAdded) {
-        console.log(tasks);
         displayTasks();
     }
     else {
         alert("Invalid task.")
     }
 })
-
