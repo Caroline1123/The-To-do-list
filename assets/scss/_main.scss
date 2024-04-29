@@ -1,0 +1,22 @@
+main {
+    background-color: white;
+    width: 50vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    padding: 3%;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+
+main > * {
+    margin: 10px;
+}
+
