@@ -1,13 +1,14 @@
 main {
     background-color: white;
-    width: 50vw;
-    height: 60vh;
+    width: 80vw;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     border-radius: 25px;
     padding: 3%;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-size: 16px;
 }
 
 h1 {
@@ -15,8 +16,29 @@ h1 {
     font-size: 2rem;
 }
 
+h2 {
+    font-weight: 400;
+    font-size: 1.3rem;
+}
 
 main > * {
     margin: 10px;
 }
 
+.new_task {
+    display: flex;
+    input {
+        border-radius: 10px;
+        width: 50vw;
+        margin-right: 3%;
+    }
+    & > img:hover {
+        transform: scale(110%);
+    }
+}
+
+.tasks_list {
+    ul {
+        overflow: auto;
+    }
+}
