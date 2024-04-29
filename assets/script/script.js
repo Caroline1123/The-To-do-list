@@ -1,33 +1,23 @@
-let tasks = [];
-let id = 0;
+// Retrieve tasks list from storage, else initiate it.
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+// Retrieve ID from storage, else initiate
+let id = parseInt(localStorage.getItem('id')) || 0;
 const addBtn = document.querySelector("#add_task");
+const inputField = document.querySelector("#new_task");
+const errorDiv = document.querySelector(".alert_box");
 const ul = document.querySelector("ul");
 let selectedTasks = [];
 
-let addTask = (task) => {
-    let taskText  = task.replace(/\s/g, '');
-    if (!taskText) {
-        return false;
+
+let retrieveTask = () => {
+    const newTask = inputField.value;
+    let isTaskAdded = addTask(newTask);
+    inputField.value = "";
+    if (isTaskAdded) {
+        displayTasks();
     }
     else {
-        let newEntry = {"task": task, "id": id+1};
-        id ++;
-        tasks.push(newEntry)
-        return true;
-    }
-}
-
-let removeTask = (task_id) => {
-    const index = tasks.findIndex(task => task.id === task_id);
-    tasks.splice(index, 1);
-}
-
-let deleteSelected = () => {
-    let checkboxItems = document.querySelectorAll(".task_checkbox:checked");
-    let selected = [...checkboxItems].map(checkboxItem => checkboxItem.name.split("_")[1]);
-    for (id of selected) {
-        removeTask(id);
-        displayTasks()
+        alert("Invalid task.")
     }
 }
 
@@ -55,6 +45,38 @@ let displayTasks = () => {
     }
 }
 
+displayTasks();
+
+let addTask = (task) => {
+    let taskText  = task.replace(/\s/g, '');
+    if (!taskText) {
+        return false;
+    }
+    else {
+        id ++;
+        localStorage.setItem('id', id.toString());
+        let newEntry = {"task": task, "id": id};
+        tasks.push(newEntry);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        return true;
+    }
+}
+
+let removeTask = (task_id) => {
+    const index = tasks.findIndex(task => task.id === task_id);
+    tasks.splice(index, 1);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+let deleteSelected = () => {
+    let checkboxItems = document.querySelectorAll(".task_checkbox:checked");
+    let selected = [...checkboxItems].map(checkboxItem => checkboxItem.name.split("_")[1]);
+    for (id of selected) {
+        removeTask(id);
+        displayTasks()
+    }
+}
+
 const deleteAll = document.querySelector("#delete_selected");
 deleteAll.addEventListener("click", () => {
     deleteSelected();
@@ -62,15 +84,8 @@ deleteAll.addEventListener("click", () => {
 
 
 addBtn.addEventListener("click", () => {
-    const inputField = document.querySelector("#new_task");
-    const newTask = inputField.value;
-    inputField.value = "";
-    let taskAdded = addTask(newTask);
-    if (taskAdded) {
-        displayTasks();
-    }
-    else {
-        alert("Invalid task.")
-    }
+    retrieveTask();
 })
+
+
 

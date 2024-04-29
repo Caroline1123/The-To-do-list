@@ -1,8 +1,9 @@
 body {
-    background-color: rgb(235, 224, 197);
+    background-color: $backgroundColor;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: $roboto;
     height: 100vh;
+    font-size: 15px;
 }
