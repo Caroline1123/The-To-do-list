@@ -97,7 +97,8 @@ main > * {
 }
 
 .tasks_list ul {
-  overflow: auto;
+  max-height: 30vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   width: 100%;

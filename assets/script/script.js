@@ -9,10 +9,10 @@ const ul = document.querySelector("ul");
 let selectedTasks = [];
 
 
-let retrieveTask = () => {
-    const newTask = inputField.value;
+let retrieveTask = (taskField) => {
+    const newTask = taskField.value;
     let isTaskAdded = addTask(newTask);
-    inputField.value = "";
+    taskField.value = "";
     if (isTaskAdded) {
         displayTasks();
     }
@@ -25,20 +25,20 @@ let displayTasks = () => {
     ul.innerHTML = "";
     for (let i = 0; i < tasks.length; i++) {
         let task = tasks[i];
+        let task_id = task.id;
         let li = document.createElement("li");
         li.innerHTML = 
-        `<input type="checkbox" name="task_${task.id}" class="task_checkbox"/>
-        <label for="task_${task.id}">${task.task}</label>
-        <image class="close_button" src="assets/images/delete.svg" id="task_${task.id}" alt="delete task" title="Delete Task"></image>
+        `<input type="checkbox" name="task_id>" class="task_checkbox"/>
+        <label name="task${task.id}">${task.task}</label>
+        <image class="close_button" src="assets/images/delete.svg" id="task_${task_id}" alt="delete task" title="Delete Task"></image>
         `;
         ul.appendChild(li);
     }
     const closeBtns = document.querySelectorAll(".close_button");
-    for (btn of closeBtns) {
+    for (let btn of closeBtns) {
         btn.addEventListener("click", function() {
             let taskId = this.id;
             taskId = parseInt(taskId.split('_')[1]);
-            console.log(taskId);
             removeTask(taskId);
             displayTasks();
         })
@@ -84,8 +84,5 @@ deleteAll.addEventListener("click", () => {
 
 
 addBtn.addEventListener("click", () => {
-    retrieveTask();
+    retrieveTask(inputField);
 })
-
-
-
