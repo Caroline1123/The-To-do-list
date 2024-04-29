@@ -1,5 +1,7 @@
 main {
-    background-color: white;
+    background-color: #fff;
+    background-image: linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1.2em;
     width: 80vw;
     height: 80vh;
     max-height: 80vh;
@@ -8,18 +10,24 @@ main {
     flex-direction: column;
     border-radius: 25px;
     padding: 3%;
-    justify-content: center;
+    justify-content: top;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: auto;
 }
 
 h1 {
     font-weight: 600;
-    font-size: 1.6rem;
+    font-size: 2.5rem;
+    &::before {
+        content : "";
+        background-color: blue;
+        width : 100%;
+    }
 }
 
 h2 {
-    font-weight: 400;
-    font-size: 1.25rem;
+    font-weight: 600;
+    font-size: 1.5rem;
     margin-bottom: 1vh;
 }
 
@@ -30,7 +38,7 @@ main > * {
 .new_task {
     display: flex;
     input {
-        padding:0 3px;
+        padding:0 15px;
         border-radius: 10px;
         width: 55vw;
         margin-right: 3%;
@@ -47,14 +55,14 @@ main > * {
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        width : 100%;
+        width : 90%;
         li {
             display: flex;
             width: 100%;
             align-content: top;
             margin: 6px 0;
             :nth-child(2) {
-                flex: 90%;
+                flex: 80%;
             }
             & > * {
                 padding: 0 1vw;
@@ -74,12 +82,14 @@ input[type="checkbox"]{
 
 .close_button:hover {
     transform: scale(110%);
+    transform: translateX(-2%);
     cursor: pointer;
 }
 
 div:last-of-type {
     display:flex;
     justify-content: right;
+    width: 87%;
 }
 
 #delete_selected {
@@ -93,4 +103,9 @@ div:last-of-type {
     &:hover {
         transform: scale(105%)
     }
+}
+
+.done  {
+    text-decoration: line-through;
+    color:red;
 }
