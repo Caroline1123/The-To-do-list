@@ -56,9 +56,10 @@ const retrieveTask = (taskField) => {
 
 const deleteSelected = () => {
     let checkboxItems = document.querySelectorAll(".task_checkbox:checked");
-    let selected = [...checkboxItems].map(checkboxItem => checkboxItem.name.split("_")[1]);
-    for (let elem of selected) {
-        removeTask(elem);
+    let selected = [...checkboxItems];
+    for (let checkbox of selected) {
+        let id = parseInt(checkbox.name);
+        removeTask(id);
         displayTasks();
     }
 };
