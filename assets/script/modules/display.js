@@ -50,7 +50,7 @@ const retrieveTask = (taskField) => {
     let isTaskAdded = addTask(newTask);
     taskField.value = "";
     if (!isTaskAdded) {
-        alert("Invalid task.");
+        alert("Invalid Task!");
     }
 };
 

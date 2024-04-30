@@ -6,12 +6,16 @@ const addTask = (task) => {
     let taskText = task.replace(/\s/g, '');
     if (!taskText) {
         return false;
-    } else {
+    }
+    else if (taskText.includes('<') || taskText.includes('>')) {
+        return false;
+    }
+    else {
         let id = localStorage.getItem("id");
         id++;
-        saveIdToLocalStorage(id);
         let newEntry = { "task": task, "id": id, status: "to do"};
         tasks.push(newEntry);
+        saveIdToLocalStorage(id);
         saveTasksToLocalStorage();
         displayTasks();
         return true;

@@ -106,6 +106,8 @@ div:last-of-type {
 }
 
 .done  {
+    animation-name : markdone;
+    animation-duration : 1s;
+    color: green;
     text-decoration: line-through;
-    color:red;
 }
